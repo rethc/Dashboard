@@ -24,7 +24,23 @@ namespace Dashboard.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Sale>>> GetSales()
         {
-            return await _context.Sales.ToListAsync();
+
+            //return await _context.Sales.Include(r => r.Customer).Include(r => r.Product).Include(r => r.Store).ToListAsync();
+
+            var sales = await _context.Sales.Include(s => s.Customer).Include(s => s.Product).Include(s => s.Store)
+
+            .Select(sale => new {
+            Id = sale.Id,
+            CustomerId = sale.CustomerId,
+            Customer = sale.Customer.FirstName + " " + sale.Customer.LastName,
+            ProductId = sale.ProductId,
+            product = sale.Product.Name,
+            StoreId = sale.StoreId,
+            Store = sale.Store.Name,
+            DateSold = sale.DateSold
+         }).ToListAsync();
+         
+         return Ok(sales);
         }
 
         // GET: api/Sales/5

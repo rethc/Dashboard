@@ -13,6 +13,7 @@ export default class NavMenu extends Component {
                         <Nav.Link as={NavLink} to="/customers">Customers</Nav.Link>
                         <Nav.Link as={NavLink} to="/products">Products</Nav.Link>
                         <Nav.Link as={NavLink} to="/stores">Stores</Nav.Link>
+                        <Nav.Link as={NavLink} to="/sales">Sales</Nav.Link>
                     </Nav>
                     <Nav>
                         <Nav.Link href="#about">About</Nav.Link>
