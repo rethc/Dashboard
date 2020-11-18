@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavMenu from './NavMenu';
+import { Container } from 'react-bootstrap';
 
 export default class Layout extends Component {
 
@@ -8,9 +9,8 @@ export default class Layout extends Component {
             <div>
                 <NavMenu />
                 {this.props.children}
-
                 <hr />
-                <p>@Chesda Reth</p>
+                <Container fluid>&copy; 2020 - Chesda Reth React.js </Container >
             </div>
         );
     }
