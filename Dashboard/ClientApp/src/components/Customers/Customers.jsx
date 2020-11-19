@@ -49,6 +49,7 @@ export default class Customers extends Component {
                     columns={columns}
                     model={model}
                     data={data}
+                    getAllData={this.getAllData}
                 />
             </div >
         )

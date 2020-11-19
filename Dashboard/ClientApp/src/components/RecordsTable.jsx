@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Table, Container } from 'react-bootstrap';
 import CreateEditCustomer from './Customers/CreateEditCustomer';
+import DeleteRecord from './DeleteRecord';
+
 
 export default class RecordsTable extends Component {
     constructor(props) {
@@ -61,10 +63,10 @@ export default class RecordsTable extends Component {
                                                 }
                                             })
                                         }
-                                        {model === 'customer' && <td>  <CreateEditCustomer model={model} option={'Edit'} reload={this.props.getAllData} /> </td>}
+                                        {model === 'customer' && <td>  <CreateEditCustomer model={model} data={item} option={'Edit'} reload={this.props.getAllData} /> </td>}
                                         {model === 'sale' && <td>Stuff </td>}
                                         {model === 'product' && <td>Stuff </td>}
-                                        <td>Delete</td>
+                                        <td><DeleteRecord model={model} data={item} reload={this.props.getAllData} /></td>
                                     </tr>
                                 )
                             })

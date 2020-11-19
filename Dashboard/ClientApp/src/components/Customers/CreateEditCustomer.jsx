@@ -14,7 +14,7 @@ export default class CreateEditCustomer extends Component {
         }
     }
 
-    // Create a new customer record, then get data from database to refresh component
+    // Create a new customer record, then get data from database to reload component
     create = () => {
         axios.post(`api/Customers`, {
             firstName: this.state.firstName,
@@ -29,7 +29,7 @@ export default class CreateEditCustomer extends Component {
             });
     }
 
-    // Update the current customer record, then get data from database to refresh component
+    // Update the current customer record, then get data from database to reload component
     update = () => {
         axios.put(`api/Customers/${this.state.id}`, {
             id: this.state.id,
@@ -41,12 +41,13 @@ export default class CreateEditCustomer extends Component {
                 this.props.reload();
             })
             .catch((err) => {
-                alert(err);
+                console.log(err);
             });
     }
 
+
     // When the button is clicked, close modal and add data to database
-    saveData = () => {
+    saveCustomer = () => {
         this.setState({ open: false });
         this.props.option === 'Create' ? this.create() : this.update()
         this.setState({
@@ -116,11 +117,11 @@ export default class CreateEditCustomer extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="dark" onClick={this.handleClose}>
-                            Close
+                            Cancel
                     </Button>
-                        <Button variant="success" onClick={this.handleClose}>
-                            Save Changes
-                    </Button>
+                        <Button variant="success" onClick={this.saveCustomer}>
+                            {this.props.option}
+                        </Button>
                     </Modal.Footer>
                 </Modal>
             </>
