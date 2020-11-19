@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import RecordsTable from '../RecordsTable';
 import axios from 'axios';
+import CreateEditCustomer from './CreateEditCustomer';
+import { Container } from 'react-bootstrap';
 
 export default class Customers extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            model: 'customers',
+            model: 'customer',
             columns: ['firstName', 'lastName', 'address'],
             data: [],
         }
@@ -35,6 +37,13 @@ export default class Customers extends Component {
 
         return (
             <div>
+                <Container fluid>
+                    <h4>Customer Table</h4>
+
+                    <CreateEditCustomer model={model} option={'Create'} reload={this.getAllData} />
+                    <p></p>
+
+                </Container>
 
                 <RecordsTable
                     columns={columns}

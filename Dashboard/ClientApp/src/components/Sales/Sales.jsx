@@ -6,7 +6,7 @@ export default class Sales extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            model: 'sales',
+            model: 'sale',
             columns: ['customer', 'product', 'store', 'dateSold'],
             data: [],
         }

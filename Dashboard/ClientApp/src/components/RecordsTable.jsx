@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Table, Container } from 'react-bootstrap';
+import CreateEditCustomer from './Customers/CreateEditCustomer';
 
 export default class RecordsTable extends Component {
     constructor(props) {
@@ -7,6 +8,16 @@ export default class RecordsTable extends Component {
         this.state = {
         }
     }
+
+    parseDate = (d) => {
+        const date = new Date(d);
+        return new Intl.DateTimeFormat("en-GB", {
+            year: "numeric",
+            month: "long",
+            day: "2-digit"
+        }).format(date);
+    }
+
 
     render() {
         const {
@@ -17,7 +28,6 @@ export default class RecordsTable extends Component {
 
         return (
             <Container fluid>
-                <h4>{model[0].toUpperCase() + model.slice(1)} Table </h4>
 
                 <Table striped bordered>
                     <thead>
@@ -43,7 +53,7 @@ export default class RecordsTable extends Component {
                                         {
                                             columns.map((col) => {
                                                 if (col === 'dateSold') {
-                                                    return (<td key={col}>{ }</td>)
+                                                    return (<td key={col}>{this.parseDate(item[col])}</td>)
                                                 } else if (col === 'price') {
                                                     return (<td key={col}>${item[col]}</td>)
                                                 } else {
@@ -51,8 +61,9 @@ export default class RecordsTable extends Component {
                                                 }
                                             })
                                         }
-                                        {model === 'customer' && <td> Add New </td>}
-                                        <td>Edit</td>
+                                        {model === 'customer' && <td>  <CreateEditCustomer model={model} option={'Edit'} reload={this.props.getAllData} /> </td>}
+                                        {model === 'sale' && <td>Stuff </td>}
+                                        {model === 'product' && <td>Stuff </td>}
                                         <td>Delete</td>
                                     </tr>
                                 )
