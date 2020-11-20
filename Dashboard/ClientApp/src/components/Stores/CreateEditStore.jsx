@@ -25,6 +25,12 @@ export default class CreateEditStore extends Component {
             .catch((err) => {
                 alert(err);
             });
+
+        this.setState({
+            id: null,
+            name: '',
+            address: ''
+        });
     }
 
     // Update the current store record, then get data from database to reload component
@@ -46,12 +52,7 @@ export default class CreateEditStore extends Component {
     // When the button is clicked, close modal and add data to database
     saveStore = () => {
         this.setState({ open: false });
-        this.props.option === 'Create' ? this.create() : this.update()
-        this.setState({
-            id: null,
-            name: '',
-            address: ''
-        }, () => console.log())
+        this.props.option === 'Create' ? this.create() : this.update();
     }
 
     handleOpen = () => {

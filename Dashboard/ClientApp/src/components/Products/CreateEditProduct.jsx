@@ -25,6 +25,12 @@ export default class CreateEditProduct extends Component {
             .catch((err) => {
                 alert(err);
             });
+
+        this.setState({
+            id: null,
+            name: '',
+            price: ''
+        });
     }
 
     // Update the current product record, then get data from database to reload component
@@ -46,12 +52,7 @@ export default class CreateEditProduct extends Component {
     // When the button is clicked, close modal and add data to database
     saveProduct = () => {
         this.setState({ open: false });
-        this.props.option === 'Create' ? this.create() : this.update()
-        this.setState({
-            id: null,
-            name: '',
-            price: ''
-        }, () => console.log())
+        this.props.option === 'Create' ? this.create() : this.update();
     }
 
     handleOpen = () => {

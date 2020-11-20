@@ -27,6 +27,13 @@ export default class CreateEditCustomer extends Component {
             .catch((err) => {
                 alert(err);
             });
+
+        this.setState({
+            id: null,
+            firstName: '',
+            lastName: '',
+            address: ''
+        });
     }
 
     // Update the current customer record, then get data from database to reload component
@@ -49,13 +56,7 @@ export default class CreateEditCustomer extends Component {
     // When the button is clicked, close modal and add data to database
     saveCustomer = () => {
         this.setState({ open: false });
-        this.props.option === 'Create' ? this.create() : this.update()
-        this.setState({
-            id: null,
-            firstName: '',
-            lastName: '',
-            address: ''
-        }, () => console.log())
+        this.props.option === 'Create' ? this.create() : this.update();
     }
 
     handleOpen = () => {
