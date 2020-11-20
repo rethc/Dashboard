@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Table, Container } from 'react-bootstrap';
 import CreateEditCustomer from './Customers/CreateEditCustomer';
+import CreateEditProduct from './Products/CreateEditProduct';
+import CreateEditStore from './Stores/CreateEditStore';
 import DeleteRecord from './DeleteRecord';
 
 
@@ -19,7 +21,6 @@ export default class RecordsTable extends Component {
             day: "2-digit"
         }).format(date);
     }
-
 
     render() {
         const {
@@ -63,9 +64,10 @@ export default class RecordsTable extends Component {
                                                 }
                                             })
                                         }
-                                        {model === 'customer' && <td>  <CreateEditCustomer model={model} data={item} option={'Edit'} reload={this.props.getAllData} /> </td>}
+                                        {model === 'customer' && <td> <CreateEditCustomer model={model} data={item} option={'Edit'} reload={this.props.getAllData} /> </td>}
+                                        {model === 'product' && <td> <CreateEditProduct model={model} data={item} option={'Edit'} reload={this.props.getAllData} /> </td>}
+                                        {model === 'store' && <td> <CreateEditStore model={model} data={item} option={'Edit'} reload={this.props.getAllData} /> </td>}
                                         {model === 'sale' && <td>Stuff </td>}
-                                        {model === 'product' && <td>Stuff </td>}
                                         <td><DeleteRecord model={model} data={item} reload={this.props.getAllData} /></td>
                                     </tr>
                                 )
