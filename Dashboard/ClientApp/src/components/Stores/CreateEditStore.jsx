@@ -44,7 +44,7 @@ export default class CreateEditStore extends Component {
                 this.props.reload();
             })
             .catch((err) => {
-                console.log(err);
+                alert(err);
             });
     }
 

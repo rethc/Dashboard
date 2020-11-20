@@ -48,7 +48,7 @@ export default class CreateEditCustomer extends Component {
                 this.props.reload();
             })
             .catch((err) => {
-                console.log(err);
+                alert(err);
             });
     }
 
