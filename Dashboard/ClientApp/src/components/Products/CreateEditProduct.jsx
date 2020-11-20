@@ -111,7 +111,7 @@ export default class CreateEditProduct extends Component {
                     </Button>
                         <Button variant="success" onClick={this.saveProduct}
                             disabled={!this.state.name || !this.state.price}>
-                            {this.props.option}
+                            Confirm
                         </Button>
                     </Modal.Footer>
                 </Modal>

@@ -9,12 +9,13 @@ export default class CreateEditSale extends Component {
             open: false,
             id: this.props.data ? this.props.data.id : null,
             customerId: this.props.data ? this.props.data.customerId : '',
-            customers: [],
             productId: this.props.data ? this.props.data.productId : '',
-            products: [],
             storeId: this.props.data ? this.props.data.storeId : '',
-            stores: [],
-            dateSold: this.props.data ? this.props.data.dateSold : ''
+            dateSold: this.props.data ? this.props.data.dateSold : '',
+            customers: [], products: [], stores: [],
+            customerLabel: this.props.data ? this.props.data.customer : 'Customer',
+            productLabel: this.props.data ? this.props.data.product : 'Product',
+            storeLabel: this.props.data ? this.props.data.store : 'Store',
         }
     }
 
@@ -81,7 +82,7 @@ export default class CreateEditSale extends Component {
     }
 
     update = () => {
-        axios.put(`api/sales/${this.state.id}`, {
+        axios.put(`api/Sales/${this.state.id}`, {
             id: this.state.id,
             customerId: this.state.customerId,
             productId: this.state.productId,
@@ -110,7 +111,21 @@ export default class CreateEditSale extends Component {
     }
 
     handleCustomer = (e) => {
-        console.log(e);
+        const customer = e.split(',');
+        this.setState({ customerId: customer[0] });
+        this.setState({ customerLabel: customer[1] });
+    }
+
+    handleProduct = (e) => {
+        const product = e.split(',');
+        this.setState({ productId: product[0] });
+        this.setState({ productLabel: product[1] });
+    }
+
+    handleStore = (e) => {
+        const store = e.split(',');
+        this.setState({ storeId: store[0] });
+        this.setState({ storeLabel: store[1] });
     }
 
     render() {
@@ -136,22 +151,40 @@ export default class CreateEditSale extends Component {
                         <Form>
                             <Form.Group controlId="customer">
                                 <Form.Label>Customer</Form.Label>
-
-                                <DropdownButton id="dropdown-basic-button" title="Customer" onSelect={this.handleCustomer}>
+                                <DropdownButton id="dropdown-basic-button" title={this.state.customerLabel} onSelect={this.handleCustomer}>
                                     {this.state.customers.map((customer) => {
                                         return (
-                                            <Dropdown.Item key={customer.id} eventKey={customer.id}>{`${customer.firstName} ${customer.lastName}`}</Dropdown.Item>
+                                            <Dropdown.Item key={customer.id}
+                                                eventKey={[customer.id, `${customer.firstName} ${customer.lastName}`]}>
+                                                {`${customer.firstName} ${customer.lastName}`}
+                                            </Dropdown.Item>
                                         )
                                     })}
-
                                 </DropdownButton>
                             </Form.Group>
                             <Form.Group controlId="product">
                                 <Form.Label>Product</Form.Label>
-
+                                <DropdownButton id="dropdown-basic-button" title={this.state.productLabel} onSelect={this.handleProduct}>
+                                    {this.state.products.map((product) => {
+                                        return (
+                                            <Dropdown.Item key={product.id}
+                                                eventKey={[product.id, product.name]}> {`${product.name}`}
+                                            </Dropdown.Item>
+                                        )
+                                    })}
+                                </DropdownButton>
                             </Form.Group>
                             <Form.Group controlId="store">
                                 <Form.Label>Store</Form.Label>
+                                <DropdownButton id="dropdown-basic-button" title={this.state.storeLabel} onSelect={this.handleStore}>
+                                    {this.state.stores.map((store) => {
+                                        return (
+                                            <Dropdown.Item key={store.id}
+                                                eventKey={[store.id, store.name]}> {`${store.name}`}
+                                            </Dropdown.Item>
+                                        )
+                                    })}
+                                </DropdownButton>
 
                             </Form.Group>
                         </Form>
@@ -162,7 +195,7 @@ export default class CreateEditSale extends Component {
                             Cancel
                     </Button>
                         <Button variant="success" onClick={this.saveSale}>
-                            {this.props.option}
+                            Confirm
                         </Button>
                     </Modal.Footer>
                 </Modal>

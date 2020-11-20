@@ -122,7 +122,7 @@ export default class CreateEditCustomer extends Component {
                     </Button>
                         <Button variant="success" onClick={this.saveCustomer}
                             disabled={!this.state.firstName || !this.state.lastName || !this.state.address}>
-                            {this.props.option}
+                            Confirm
                         </Button>
                     </Modal.Footer>
                 </Modal>
