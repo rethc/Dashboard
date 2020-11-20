@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
 import axios from 'axios';
-import { Modal, Button, Form } from 'react-bootstrap';
+import React, { Component } from 'react';
+import { Modal, Button, Form, DropdownButton, Dropdown } from 'react-bootstrap';
 
 export default class CreateEditSale extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ export default class CreateEditSale extends Component {
             products: [],
             storeId: this.props.data ? this.props.data.storeId : '',
             stores: [],
-            dateSold: this.props.data ? moment(this.props.data.dateSold).format('MM/DD/YYYY') : ''
+            dateSold: this.props.data ? this.props.data.dateSold : ''
         }
     }
 
@@ -35,19 +35,6 @@ export default class CreateEditSale extends Component {
                 alert(err);
             });
     }
-
-    getAllStores = () => {
-        axios.get('api/Stores')
-            .then((res) => {
-                this.setState({
-                    stores: res.data
-                })
-            })
-            .catch((err) => {
-                alert(err);
-            });
-    }
-
     getAllProducts = () => {
         axios.get('api/Products')
             .then((res) => {
@@ -59,7 +46,17 @@ export default class CreateEditSale extends Component {
                 alert(err);
             });
     }
-
+    getAllStores = () => {
+        axios.get('api/Stores')
+            .then((res) => {
+                this.setState({
+                    stores: res.data
+                })
+            })
+            .catch((err) => {
+                alert(err);
+            });
+    }
 
     create = () => {
         axios.post('api/Sales', {
@@ -74,7 +71,6 @@ export default class CreateEditSale extends Component {
             .catch((err) => {
                 alert(err);
             });
-
         this.setState({
             id: null,
             customerId: '',
@@ -85,7 +81,7 @@ export default class CreateEditSale extends Component {
     }
 
     update = () => {
-        axios.put(`api/Sales/${this.state.id}`, {
+        axios.put(`api/sales/${this.state.id}`, {
             id: this.state.id,
             customerId: this.state.customerId,
             productId: this.state.productId,
@@ -100,110 +96,77 @@ export default class CreateEditSale extends Component {
             });
     }
 
-    saveData = () => {
+    saveSale = () => {
         this.setState({ open: false });
         this.props.option === 'Create' ? this.create() : this.update();
     }
 
-    handleDateChange = (event) => {
-        this.setState({
-            dateSold: event.target.value
-        }, () => console.log());
-
+    handleOpen = () => {
+        this.setState({ open: true })
     }
 
-    handleChange = (event, { name, value }) => {
-        this.setState({
-            [name]: value
-        })
+    handleClose = () => {
+        this.setState({ open: false })
+    }
+
+    handleCustomer = (e) => {
+        console.log(e);
     }
 
     render() {
-        const customerOptions = this.state.customers.map(obj => {
-            return {
-                'key': obj.id,
-                'text': obj.name,
-                'value': obj.id
-            }
-        })
-        const productOptions = this.state.products.map(obj => {
-            return {
-                'key': obj.id,
-                'text': obj.name,
-                'value': obj.id
-            }
-        })
-        const storeOptions = this.state.stores.map(obj => {
-            return {
-                'key': obj.id,
-                'text': obj.name,
-                'value': obj.id
-            }
-        })
-
         return (
-            <Modal
-                onClose={() => this.setState({ open: false })}
-                onOpen={() => this.setState({ open: true })}
-                open={this.state.open}
-                trigger={
-                    this.props.option === 'Create' ?
-                        <Button color='blue'>Add {this.props.model}</Button> :
-                        <Button color='yellow'>
-                            <Icon name='edit' /> EDIT
-          </Button>
+            <>
+                {this.props.option === 'Create' ?
+                    <Button variant="primary" onClick={this.handleOpen}>Create Sale</Button> :
+                    <Button variant="secondary" onClick={this.handleOpen}>Edit</Button>
                 }
-            >
-                <Modal.Header>{this.props.option} {this.props.model}</Modal.Header>
-                <Modal.Content>
-                    <Form>
-                        <Form.Input
-                            label='Date Sold'
-                            name='dateSold'
-                            value={this.state.dateSold}
-                            onChange={this.handleChange}
-                            placeholder='MM/DD/YYYY'
-                        />
 
-                        <Form.Select
-                            label='Customer'
-                            name='customerId'
-                            options={customerOptions}
-                            placeholder='Customer'
-                            value={this.state.customerId}
-                            onChange={this.handleChange}
-                        />
-                        <Form.Select
-                            label='Product'
-                            name='productId'
-                            options={productOptions}
-                            placeholder='Product'
-                            value={this.state.productId}
-                            onChange={this.handleChange}
-                        />
-                        <Form.Select
-                            label='Store'
-                            name='storeId'
-                            options={storeOptions}
-                            placeholder='Store'
-                            value={this.state.storeId}
-                            onChange={this.handleChange}
-                        />
-                    </Form>
-                </Modal.Content>
-                <Modal.Actions>
-                    <Button color='black' onClick={() => this.setState({ open: false })}>
-                        cancel
-          </Button>
-                    <Button
-                        content={this.props.option}
-                        labelPosition='right'
-                        icon='checkmark'
-                        onClick={this.saveData}
-                        positive
-                    />
-                </Modal.Actions>
-            </Modal>
+                <Modal
+                    size="lg"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                    show={this.state.open}
+                    onHide={this.handleClose}
+                >
+                    <Modal.Header>
+                        <Modal.Title>{this.props.option} {this.props.model}</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <Form>
+                            <Form.Group controlId="customer">
+                                <Form.Label>Customer</Form.Label>
+
+                                <DropdownButton id="dropdown-basic-button" title="Customer" onSelect={this.handleCustomer}>
+                                    {this.state.customers.map((customer) => {
+                                        return (
+                                            <Dropdown.Item key={customer.id} eventKey={customer.id}>{`${customer.firstName} ${customer.lastName}`}</Dropdown.Item>
+                                        )
+                                    })}
+
+                                </DropdownButton>
+                            </Form.Group>
+                            <Form.Group controlId="product">
+                                <Form.Label>Product</Form.Label>
+
+                            </Form.Group>
+                            <Form.Group controlId="store">
+                                <Form.Label>Store</Form.Label>
+
+                            </Form.Group>
+                        </Form>
+
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="dark" onClick={this.handleClose}>
+                            Cancel
+                    </Button>
+                        <Button variant="success" onClick={this.saveSale}>
+                            {this.props.option}
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+            </>
         )
     }
 }
