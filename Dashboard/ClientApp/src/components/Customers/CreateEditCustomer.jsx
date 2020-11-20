@@ -120,7 +120,8 @@ export default class CreateEditCustomer extends Component {
                         <Button variant="dark" onClick={this.handleClose}>
                             Cancel
                     </Button>
-                        <Button variant="success" onClick={this.saveCustomer}>
+                        <Button variant="success" onClick={this.saveCustomer}
+                            disabled={!this.state.firstName || !this.state.lastName || !this.state.address}>
                             {this.props.option}
                         </Button>
                     </Modal.Footer>

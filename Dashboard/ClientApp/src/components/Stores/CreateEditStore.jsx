@@ -109,7 +109,8 @@ export default class CreateEditStore extends Component {
                         <Button variant="dark" onClick={this.handleClose}>
                             Cancel
                     </Button>
-                        <Button variant="success" onClick={this.saveStore}>
+                        <Button variant="success" onClick={this.saveStore}
+                            disabled={!this.state.name || !this.state.address}>
                             {this.props.option}
                         </Button>
                     </Modal.Footer>
