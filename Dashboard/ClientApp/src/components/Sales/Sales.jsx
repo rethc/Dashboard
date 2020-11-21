@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { Container } from 'react-bootstrap';
 import RecordsTable from '../RecordsTable';
 import CreateEditSale from './CreateEditSale';
-import { Container } from 'react-bootstrap';
+import axios from 'axios';
+
 
 export default class Sales extends Component {
     constructor(props) {

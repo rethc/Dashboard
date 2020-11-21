@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -11,6 +12,8 @@ namespace Dashboard.Models
         public int CustomerId { get; set; }
         public int ProductId { get; set; }
         public int StoreId { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime DateSold { get; set; }
 
         public virtual Customer Customer { get; set; }

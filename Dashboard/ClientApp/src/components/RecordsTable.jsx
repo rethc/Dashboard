@@ -5,6 +5,7 @@ import CreateEditProduct from './Products/CreateEditProduct';
 import CreateEditStore from './Stores/CreateEditStore';
 import CreateEditSale from './Sales/CreateEditSale';
 import DeleteRecord from './DeleteRecord';
+import { format } from 'date-fns';
 
 
 export default class RecordsTable extends Component {
@@ -12,15 +13,6 @@ export default class RecordsTable extends Component {
         super(props);
         this.state = {
         }
-    }
-
-    parseDate = (d) => {
-        const date = new Date(d);
-        return new Intl.DateTimeFormat("en-GB", {
-            year: "numeric",
-            month: "long",
-            day: "2-digit"
-        }).format(date);
     }
 
     render() {
@@ -57,7 +49,7 @@ export default class RecordsTable extends Component {
                                         {
                                             columns.map((col) => {
                                                 if (col === 'dateSold') {
-                                                    return (<td key={col}>{this.parseDate(item[col])}</td>)
+                                                    return (<td key={col}>{format(new Date(item[col]), 'dd/MM/yyyy')}</td>)
                                                 } else if (col === 'price') {
                                                     return (<td key={col}>${item[col]}</td>)
                                                 } else {

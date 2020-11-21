@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import axios from 'axios';
 
 export default class CreateEditStore extends Component {
     constructor(props) {
