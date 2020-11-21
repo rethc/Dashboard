@@ -111,21 +111,18 @@ export default class CreateEditSale extends Component {
     }
 
     handleCustomer = (e) => {
-        const customer = e.split(',');
-        this.setState({ customerId: customer[0] });
-        this.setState({ customerLabel: customer[1] });
+        this.setState({ customerId: e.target.key });
+        this.setState({ customerLabel: e.target.value });
     }
 
     handleProduct = (e) => {
-        const product = e.split(',');
-        this.setState({ productId: product[0] });
-        this.setState({ productLabel: product[1] });
+        this.setState({ productId: e.target.key });
+        this.setState({ productLabel: e.target.value });
     }
 
     handleStore = (e) => {
-        const store = e.split(',');
-        this.setState({ storeId: store[0] });
-        this.setState({ storeLabel: store[1] });
+        this.setState({ storeId: e.target.key });
+        this.setState({ storeLabel: e.target.value });
     }
 
     render() {
@@ -151,41 +148,39 @@ export default class CreateEditSale extends Component {
                         <Form>
                             <Form.Group controlId="customer">
                                 <Form.Label>Customer</Form.Label>
-                                <DropdownButton id="dropdown-basic-button" title={this.state.customerLabel} onSelect={this.handleCustomer}>
+                                <Form.Control as="select" value={this.state.customerLabel} onChange={this.handleCustomer} >
                                     {this.state.customers.map((customer) => {
                                         return (
-                                            <Dropdown.Item key={customer.id}
-                                                eventKey={[customer.id, `${customer.firstName} ${customer.lastName}`]}>
+                                            <option key={customer.id} value={`${customer.firstName} ${customer.lastName}`}>
                                                 {`${customer.firstName} ${customer.lastName}`}
-                                            </Dropdown.Item>
+                                            </option>
                                         )
                                     })}
-                                </DropdownButton>
+                                </Form.Control>
                             </Form.Group>
                             <Form.Group controlId="product">
                                 <Form.Label>Product</Form.Label>
-                                <DropdownButton id="dropdown-basic-button" title={this.state.productLabel} onSelect={this.handleProduct}>
+                                <Form.Control as="select" value={this.state.productLabel} onChange={this.handleProduct} >
                                     {this.state.products.map((product) => {
                                         return (
-                                            <Dropdown.Item key={product.id}
-                                                eventKey={[product.id, product.name]}> {`${product.name}`}
-                                            </Dropdown.Item>
+                                            <option key={product.id} value={product.name}>
+                                                {product.name}
+                                            </option>
                                         )
                                     })}
-                                </DropdownButton>
+                                </Form.Control>
                             </Form.Group>
                             <Form.Group controlId="store">
                                 <Form.Label>Store</Form.Label>
-                                <DropdownButton id="dropdown-basic-button" title={this.state.storeLabel} onSelect={this.handleStore}>
+                                <Form.Control as="select" value={this.state.storeLabel} onChange={this.handleStore} >
                                     {this.state.stores.map((store) => {
                                         return (
-                                            <Dropdown.Item key={store.id}
-                                                eventKey={[store.id, store.name]}> {`${store.name}`}
-                                            </Dropdown.Item>
+                                            <option key={store.id} value={store.name}>
+                                                {store.name}
+                                            </option>
                                         )
                                     })}
-                                </DropdownButton>
-
+                                </Form.Control>
                             </Form.Group>
                         </Form>
 
