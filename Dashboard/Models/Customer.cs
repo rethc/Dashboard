@@ -9,7 +9,7 @@ namespace Dashboard
     {
         public Customer()
         {
-            Sales = new HashSet<Sale>();
+            Sales = new HashSet<Sales>();
         }
 
         [Key]
@@ -27,6 +27,6 @@ namespace Dashboard
         [StringLength(255)]
         public string Address { get; set; }
 
-        public virtual ICollection<Sale> Sales { get; set; }
+        public virtual ICollection<Sales> Sales { get; set; }
     }
 }

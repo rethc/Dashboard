@@ -12,7 +12,7 @@ namespace Dashboard
     {
         public Product()
         {
-            Sales = new HashSet<Sale>();
+            Sales = new HashSet<Sales>();
         }
 
         [Key]
@@ -26,6 +26,6 @@ namespace Dashboard
         [Range(0, 9999.99)]
         public decimal Price { get; set; }
 
-        public virtual ICollection<Sale> Sales { get; set; }
+        public virtual ICollection<Sales> Sales { get; set; }
     }
 }

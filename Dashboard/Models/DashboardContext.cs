@@ -19,7 +19,7 @@ namespace Dashboard
 
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Sale> Sales { get; set; }
+        public virtual DbSet<Sales> Sales { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -56,7 +56,7 @@ namespace Dashboard
                 entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
             });
 
-            modelBuilder.Entity<Sale>(entity =>
+            modelBuilder.Entity<Sales>(entity =>
             {
                 entity.HasIndex(e => e.CustomerId, "IX_FK_CustomerSales");
 

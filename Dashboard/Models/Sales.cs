@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dashboard
 {
-    public partial class Sale
+    public partial class Sales
     {
         [Key]
         public int Id { get; set; }
