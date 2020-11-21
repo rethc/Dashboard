@@ -4,7 +4,6 @@ import RecordsTable from '../RecordsTable';
 import CreateEditSale from './CreateEditSale';
 import axios from 'axios';
 
-
 export default class Sales extends Component {
     constructor(props) {
         super(props);

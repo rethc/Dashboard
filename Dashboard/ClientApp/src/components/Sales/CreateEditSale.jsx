@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import { parseISO } from 'date-fns';
+import nz from 'date-fns/locale/en-NZ';
 
 import "react-datepicker/dist/react-datepicker.css";
+
+registerLocale("nz", nz);
 
 export default class CreateEditSale extends Component {
     constructor(props) {
@@ -15,7 +18,7 @@ export default class CreateEditSale extends Component {
             customerId: this.props.data ? this.props.data.customerId : '',
             productId: this.props.data ? this.props.data.productId : '',
             storeId: this.props.data ? this.props.data.storeId : '',
-            dateSold: this.props.data ? parseISO((this.props.data.dateSold), 'dd/MM/yyyy') : new Date(),
+            dateSold: this.props.data ? parseISO((this.props.data.dateSold), 'dd/MM/yyyy', "nz") : new Date(),
             customers: [], products: [], stores: []
         }
     }
@@ -62,10 +65,10 @@ export default class CreateEditSale extends Component {
 
     create = () => {
         axios.post(`api/Sales`, {
-            customerId: 2,
-            productId: 2,
-            storeId: 2,
-            dateSold: '21-11-2020'
+            customerId: this.state.customerId,
+            productId: this.state.productId,
+            storeId: this.state.storeId,
+            dateSold: this.state.dateSold
         })
             .then((res) => {
                 this.props.reload();
@@ -73,6 +76,14 @@ export default class CreateEditSale extends Component {
             .catch((err) => {
                 console.log(err.response);
             });
+
+        this.setState({
+            id: null,
+            customerId: '',
+            productId: '',
+            storeId: '',
+            dateSold: new Date()
+        });
     }
 
     update = () => {
@@ -81,7 +92,7 @@ export default class CreateEditSale extends Component {
             customerId: this.state.customerId,
             productId: this.state.productId,
             storeId: this.state.storeId,
-            dateSold: '21-11-2020'
+            dateSold: this.state.dateSold
         })
             .then((res) => {
                 this.props.reload();
@@ -106,6 +117,7 @@ export default class CreateEditSale extends Component {
 
     handleDate = (date) => {
         this.setState({ dateSold: date })
+        console.log(this.state.dateSold);
     }
 
     render() {
@@ -135,6 +147,7 @@ export default class CreateEditSale extends Component {
                                 <Form.Label>Date Sold</Form.Label>
                                 <br />
                                 <DatePicker
+                                    locale="nz"
                                     selected={this.state.dateSold}
                                     onChange={this.handleDate}
                                     dateFormat="dd/MM/yyyy"

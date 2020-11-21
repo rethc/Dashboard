@@ -5,7 +5,8 @@ import CreateEditProduct from './Products/CreateEditProduct';
 import CreateEditStore from './Stores/CreateEditStore';
 import CreateEditSale from './Sales/CreateEditSale';
 import DeleteRecord from './DeleteRecord';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
+import nz from 'date-fns/locale/en-NZ';
 
 
 export default class RecordsTable extends Component {
@@ -50,7 +51,7 @@ export default class RecordsTable extends Component {
                                         {
                                             columns.map((col) => {
                                                 if (col === 'dateSold') {
-                                                    return (<td key={col}>{format(new Date(item[col]), 'dd/MM/yyyy')}</td>)
+                                                    return (<td key={col}>{format(parseISO(item[col]), 'dd/MM/yyyy', nz)}</td>)
                                                 } else if (col === 'price') {
                                                     return (<td key={col}>${item[col]}</td>)
                                                 } else {
