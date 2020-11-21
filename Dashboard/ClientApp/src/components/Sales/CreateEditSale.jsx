@@ -107,18 +107,6 @@ export default class CreateEditSale extends Component {
         this.setState({ open: false })
     }
 
-    handleCustomer = (e) => {
-        this.setState({ customerId: e.target.value });
-    }
-
-    handleProduct = (e) => {
-        this.setState({ productId: e.target.value });
-    }
-
-    handleStore = (e) => {
-        this.setState({ storeId: e.target.value });
-    }
-
     render() {
         return (
             <>
@@ -142,7 +130,12 @@ export default class CreateEditSale extends Component {
                         <Form>
                             <Form.Group controlId="customer">
                                 <Form.Label>Customer</Form.Label>
-                                <Form.Control as="select" onChange={this.handleCustomer} >
+                                <Form.Control
+                                    as="select"
+                                    value={this.state.customerId}
+                                    onChange={e => this.setState({ customerId: e.target.value })}
+                                >
+                                    <option value='' disabled hidden>Select a customer</option>
                                     {this.state.customers.map((customer) => {
                                         return (
                                             <option key={customer.id} value={customer.id} >
@@ -154,7 +147,12 @@ export default class CreateEditSale extends Component {
                             </Form.Group>
                             <Form.Group controlId="product">
                                 <Form.Label>Product</Form.Label>
-                                <Form.Control as="select" onChange={this.handleProduct}>
+                                <Form.Control
+                                    as="select"
+                                    defaultValue={this.state.productId}
+                                    onChange={e => this.setState({ productId: e.target.value })}
+                                >
+                                    <option value='' disabled hidden>Select a product</option>
                                     {this.state.products.map((product) => {
                                         return (
                                             <option key={product.id} value={product.id}>
@@ -166,7 +164,12 @@ export default class CreateEditSale extends Component {
                             </Form.Group>
                             <Form.Group controlId="store">
                                 <Form.Label>Store</Form.Label>
-                                <Form.Control as="select" onChange={this.handleStore}>
+                                <Form.Control
+                                    as="select"
+                                    defaultValue={this.state.storeId}
+                                    onChange={e => this.setState({ storeId: e.target.value })}
+                                >
+                                    <option value='' disabled hidden>Select a store</option>
                                     {this.state.stores.map((store) => {
                                         return (
                                             <option key={store.id} value={store.id}>
