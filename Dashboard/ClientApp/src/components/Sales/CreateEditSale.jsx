@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import DatePicker, { registerLocale } from "react-datepicker";
-import { parseISO } from 'date-fns';
+import { parseISO, addDays } from 'date-fns';
 import nz from 'date-fns/locale/en-NZ';
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -68,7 +68,7 @@ export default class CreateEditSale extends Component {
             customerId: this.state.customerId,
             productId: this.state.productId,
             storeId: this.state.storeId,
-            dateSold: this.state.dateSold
+            dateSold: addDays(new Date(this.state.dateSold), 1)
         })
             .then((res) => {
                 this.props.reload();
@@ -92,7 +92,7 @@ export default class CreateEditSale extends Component {
             customerId: this.state.customerId,
             productId: this.state.productId,
             storeId: this.state.storeId,
-            dateSold: this.state.dateSold
+            dateSold: addDays(new Date(this.state.dateSold), 1)
         })
             .then((res) => {
                 this.props.reload();
