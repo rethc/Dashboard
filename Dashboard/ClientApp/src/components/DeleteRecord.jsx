@@ -19,7 +19,7 @@ export default class DeleteRecord extends Component {
                 this.props.reload();
             })
             .catch((err) => {
-                alert(err);
+                console.log(err);
             });
     }
 
@@ -48,10 +48,16 @@ export default class DeleteRecord extends Component {
                     </Modal.Header>
                     <Modal.Body>Are you sure you want to delete this?</Modal.Body>
                     <Modal.Footer>
-                        <Button variant="dark" onClick={this.handleClose}>
+                        <Button
+                            variant="dark"
+                            onClick={this.handleClose}
+                        >
                             Cancel
                     </Button>
-                        <Button variant="danger" onClick={this.delete}>
+                        <Button
+                            variant="danger"
+                            onClick={this.delete}
+                        >
                             Delete
                         </Button>
                     </Modal.Footer>
