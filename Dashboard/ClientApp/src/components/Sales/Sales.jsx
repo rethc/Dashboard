@@ -47,6 +47,7 @@ export default class Sales extends Component {
                     columns={columns}
                     model={model}
                     data={data}
+                    reload={this.getAllData}
                 />
             </div >
         )

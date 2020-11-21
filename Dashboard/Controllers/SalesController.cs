@@ -47,14 +47,27 @@ namespace Dashboard.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Sale>> GetSale(int id)
         {
-            var sale = await _context.Sales.FindAsync(id);
+            /*var sale = await _context.Sales.FindAsync(id);
 
             if (sale == null)
             {
                 return NotFound();
             }
 
-            return sale;
+            return sale;*/
+
+            var sales = await _context.Sales
+         .Include(s => s.Store)
+         .Include(s => s.Customer)
+         .Include(s => s.Product)
+          .FirstOrDefaultAsync(s => s.Id == id);
+
+            if (sales == null)
+            {
+                return NotFound();
+            }
+
+            return sales;
         }
 
         // PUT: api/Sales/5

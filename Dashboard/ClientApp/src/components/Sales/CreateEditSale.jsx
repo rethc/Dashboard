@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import { Modal, Button, Form, DropdownButton, Dropdown } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 
 export default class CreateEditSale extends Component {
     constructor(props) {
@@ -12,10 +12,7 @@ export default class CreateEditSale extends Component {
             productId: this.props.data ? this.props.data.productId : '',
             storeId: this.props.data ? this.props.data.storeId : '',
             dateSold: this.props.data ? this.props.data.dateSold : '',
-            customers: [], products: [], stores: [],
-            customerLabel: this.props.data ? this.props.data.customer : 'Customer',
-            productLabel: this.props.data ? this.props.data.product : 'Product',
-            storeLabel: this.props.data ? this.props.data.store : 'Store',
+            customers: [], products: [], stores: []
         }
     }
 
@@ -111,18 +108,15 @@ export default class CreateEditSale extends Component {
     }
 
     handleCustomer = (e) => {
-        this.setState({ customerId: e.target.key });
-        this.setState({ customerLabel: e.target.value });
+        this.setState({ customerId: e.target.value });
     }
 
     handleProduct = (e) => {
-        this.setState({ productId: e.target.key });
-        this.setState({ productLabel: e.target.value });
+        this.setState({ productId: e.target.value });
     }
 
     handleStore = (e) => {
-        this.setState({ storeId: e.target.key });
-        this.setState({ storeLabel: e.target.value });
+        this.setState({ storeId: e.target.value });
     }
 
     render() {
@@ -148,10 +142,10 @@ export default class CreateEditSale extends Component {
                         <Form>
                             <Form.Group controlId="customer">
                                 <Form.Label>Customer</Form.Label>
-                                <Form.Control as="select" value={this.state.customerLabel} onChange={this.handleCustomer} >
+                                <Form.Control as="select" onChange={this.handleCustomer} >
                                     {this.state.customers.map((customer) => {
                                         return (
-                                            <option key={customer.id} value={`${customer.firstName} ${customer.lastName}`}>
+                                            <option key={customer.id} value={customer.id} >
                                                 {`${customer.firstName} ${customer.lastName}`}
                                             </option>
                                         )
@@ -160,10 +154,10 @@ export default class CreateEditSale extends Component {
                             </Form.Group>
                             <Form.Group controlId="product">
                                 <Form.Label>Product</Form.Label>
-                                <Form.Control as="select" value={this.state.productLabel} onChange={this.handleProduct} >
+                                <Form.Control as="select" onChange={this.handleProduct}>
                                     {this.state.products.map((product) => {
                                         return (
-                                            <option key={product.id} value={product.name}>
+                                            <option key={product.id} value={product.id}>
                                                 {product.name}
                                             </option>
                                         )
@@ -172,10 +166,10 @@ export default class CreateEditSale extends Component {
                             </Form.Group>
                             <Form.Group controlId="store">
                                 <Form.Label>Store</Form.Label>
-                                <Form.Control as="select" value={this.state.storeLabel} onChange={this.handleStore} >
+                                <Form.Control as="select" onChange={this.handleStore}>
                                     {this.state.stores.map((store) => {
                                         return (
-                                            <option key={store.id} value={store.name}>
+                                            <option key={store.id} value={store.id}>
                                                 {store.name}
                                             </option>
                                         )
