@@ -24,6 +24,9 @@ namespace Dashboard.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Sales>>> GetSales()
         {
+
+            //return await _context.Sales.Include(r => r.Customer).Include(r => r.Product).Include(r => r.Store).ToListAsync();
+
             var sales = await _context.Sales.Include(s => s.Customer).Include(s => s.Product).Include(s => s.Store)
             .Select(sale => new {
                 Id = sale.Id,
@@ -35,15 +38,24 @@ namespace Dashboard.Controllers
                 Store = sale.Store.Name,
                 DateSold = sale.DateSold
             }).ToListAsync();
-
-            return Ok(sales);
+         
+         return Ok(sales);
         }
 
         // GET: api/Sales/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Sales>> GetSales(int id)
+        public async Task<ActionResult<Sales>> GetSale(int id)
         {
-            var sales = await _context.Sales.FindAsync(id);
+            /*var sale = await _context.Sales.FindAsync(id);
+
+            if (sale == null)
+            {
+                return NotFound();
+            }
+
+            return sale;*/
+
+            var sales = await _context.Sales.Include(s => s.Customer).Include(s => s.Product).Include(s => s.Store).FirstOrDefaultAsync(s => s.Id == id);
 
             if (sales == null)
             {
@@ -56,7 +68,7 @@ namespace Dashboard.Controllers
         // PUT: api/Sales/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSales(int id, Sales sales)
+        public async Task<IActionResult> PutSale(int id, Sales sales)
         {
             if (id != sales.Id)
             {
@@ -71,7 +83,7 @@ namespace Dashboard.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SalesExists(id))
+                if (!SaleExists(id))
                 {
                     return NotFound();
                 }
@@ -87,17 +99,17 @@ namespace Dashboard.Controllers
         // POST: api/Sales
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Sales>> PostSales(Sales sales)
+        public async Task<ActionResult<Sales>> PostSale(Sales sales)
         {
             _context.Sales.Add(sales);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSales", new { id = sales.Id }, sales);
+            return CreatedAtAction("GetSale", new { id = sales.Id }, sales);
         }
 
         // DELETE: api/Sales/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSales(int id)
+        public async Task<IActionResult> DeleteSale(int id)
         {
             var sales = await _context.Sales.FindAsync(id);
             if (sales == null)
@@ -111,7 +123,7 @@ namespace Dashboard.Controllers
             return NoContent();
         }
 
-        private bool SalesExists(int id)
+        private bool SaleExists(int id)
         {
             return _context.Sales.Any(e => e.Id == id);
         }
