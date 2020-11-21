@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import RecordsTable from '../RecordsTable';
 import axios from 'axios';
-import { Container } from 'react-bootstrap';
+import RecordsTable from '../RecordsTable';
 import CreateEditSale from './CreateEditSale';
+import { Container } from 'react-bootstrap';
 
 export default class Sales extends Component {
     constructor(props) {
@@ -39,15 +39,18 @@ export default class Sales extends Component {
             <div>
                 <Container fluid>
                     <h4>Sales Table</h4>
-                    <CreateEditSale model={model} option={'Create'} reload={this.getAllData} />
+                    <CreateEditSale
+                        model={model}
+                        option={'Create'}
+                        reload={this.getAllData}
+                    />
                     <p></p>
-
                 </Container>
                 <RecordsTable
                     columns={columns}
                     model={model}
                     data={data}
-                    reload={this.getAllData}
+                    getAllData={this.getAllData}
                 />
             </div >
         )
