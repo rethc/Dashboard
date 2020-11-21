@@ -1,6 +1,10 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import DatePicker from "react-datepicker";
+import { parseISO } from 'date-fns';
+
+import "react-datepicker/dist/react-datepicker.css";
 
 export default class CreateEditSale extends Component {
     constructor(props) {
@@ -11,7 +15,7 @@ export default class CreateEditSale extends Component {
             customerId: this.props.data ? this.props.data.customerId : '',
             productId: this.props.data ? this.props.data.productId : '',
             storeId: this.props.data ? this.props.data.storeId : '',
-            dateSold: this.props.data ? this.props.data.dateSold : '',
+            dateSold: this.props.data ? parseISO((this.props.data.dateSold), 'dd/MM/yyyy') : new Date(),
             customers: [], products: [], stores: []
         }
     }
@@ -100,7 +104,12 @@ export default class CreateEditSale extends Component {
         this.setState({ open: false })
     }
 
+    handleDate = (date) => {
+        this.setState({ dateSold: date })
+    }
+
     render() {
+
         return (
             <>
                 {this.props.option === 'Create' ?
@@ -121,6 +130,19 @@ export default class CreateEditSale extends Component {
 
                     <Modal.Body>
                         <Form>
+
+                            <Form.Group controlId="date">
+                                <Form.Label>Date Sold</Form.Label>
+                                <br />
+                                <DatePicker
+                                    selected={this.state.dateSold}
+                                    onChange={this.handleDate}
+                                    dateFormat="dd/MM/yyyy"
+                                    name="dateSold"
+                                />
+                            </Form.Group>
+
+
                             <Form.Group controlId="customer">
                                 <Form.Label>Customer</Form.Label>
                                 <Form.Control
