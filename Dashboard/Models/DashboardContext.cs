@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace Dashboard
+namespace Dashboard.Models
 {
     public partial class DashboardContext : DbContext
     {
@@ -26,7 +26,7 @@ namespace Dashboard
         {
             if (!optionsBuilder.IsConfigured)
             {
-
+                //optionsBuilder.UseSqlServer("Server=DESKTOP-05NP200;Database=Dashboard;integrated Security=True");
             }
         }
 
