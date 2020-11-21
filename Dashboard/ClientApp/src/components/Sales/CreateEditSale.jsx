@@ -58,10 +58,10 @@ export default class CreateEditSale extends Component {
 
     create = () => {
         axios.post('api/Sales', {
-            customerId: this.state.customerId,
-            productId: this.state.productId,
-            storeId: this.state.storeId,
-            dateSold: this.state.dateSold
+            customerId: 1,
+            productId: 1,
+            storeId: 1,
+            dateSold: '21-11-2020'
         })
             .then((res) => {
                 this.props.reload();
@@ -69,13 +69,6 @@ export default class CreateEditSale extends Component {
             .catch((err) => {
                 alert(err);
             });
-        this.setState({
-            id: null,
-            customerId: '',
-            productId: '',
-            storeId: '',
-            dateSold: ''
-        });
     }
 
     update = () => {
