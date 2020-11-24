@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
+    "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
     "jquery": "^3.5.1",
     "merge": "^1.2.1",

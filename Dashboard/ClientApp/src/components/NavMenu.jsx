@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
-import '../NavMenu.css';
-
 export default class NavMenu extends Component {
     render() {
         return (
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" >
+            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="sidebar">
                 <Navbar.Brand href="/">Dashboard</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
@@ -22,7 +20,6 @@ export default class NavMenu extends Component {
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
-
         );
     }
 }
