@@ -5,7 +5,10 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import { parseISO, addDays } from 'date-fns';
 import nz from 'date-fns/locale/en-NZ';
 
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css';
+import './DatePicker.css';
+
+
 
 registerLocale("nz", nz);
 
@@ -152,6 +155,7 @@ export default class CreateEditSale extends Component {
                                     onChange={this.handleDate}
                                     dateFormat="dd/MM/yyyy"
                                     name="dateSold"
+                                    wrapperClassName="datePicker"
                                 />
                             </Form.Group>
 

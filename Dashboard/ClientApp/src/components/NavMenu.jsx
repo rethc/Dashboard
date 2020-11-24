@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
+import '../NavMenu.css';
+
 export default class NavMenu extends Component {
     render() {
         return (
