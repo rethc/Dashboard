@@ -1,4 +1,4 @@
-# MVP Studio Software Developer Onboarding Project- React.js Dashboard 
+# MVP Studio Onboarding Project - React.js Dashboard 
 A simple dashboard in React.JS with the Customer, Product, Stores, and Sales tables.
 
 Welcome to my react web application that demonstrates CRUD (Create, Read, Update and Delete) operations on an SQL database. 
