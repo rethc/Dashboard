@@ -1,7 +1,5 @@
 # MVP Studio Onboarding Project - React.js Dashboard 
-A simple dashboard in React.JS with the Customer, Product, Stores, and Sales tables.
-
-Welcome to my react web application that demonstrates CRUD (Create, Read, Update and Delete) operations on an SQL database. 
+A simple web app dashboard using React.JS that demonstrates CRUD (Create, Read, Update and Delete) operations on a typical web store database - Customer, Product, Stores, and Sales tables.
 
 ## This app is built using:
 * **ASP.NET Core** and **C#** for cross-platform server-side code.
